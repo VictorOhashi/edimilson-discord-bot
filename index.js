@@ -14,7 +14,11 @@ const frases = [
   'Corno!!',
   'Já queimou seu Judeu hj??',
   'Já fez sua parte? Deu paulada em maconheiro hj?',
-  'LGBT -> Levanta gay bora trabalhar',
+  `Sim eu sou LGBT:
+    Levanta
+    Gay
+    Bora
+    Trabalhar`,
   'Suicídio é sempre uma opção',
   'Desistir é pros fracos, faça como eu nem tente',
   'Talkei',
