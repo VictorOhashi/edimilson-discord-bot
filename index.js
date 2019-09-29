@@ -117,6 +117,12 @@ client.on('message', msg => {
 })
 
 client.on('message', msg => {
+  if (msg.content.toLowerCase() === 'quem e voce') {
+    msg.channel.send('Eu sou Edmilson!')
+  }
+})
+
+client.on('message', msg => {
   if (msg.content.toLowerCase() === 'trotos') {
     msg.channel.send('Broios')
   }
