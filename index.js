@@ -118,7 +118,7 @@ client.on('message', msg => {
 
 client.on('message', msg => {
   if (msg.content.toLowerCase() === 'quem e voce') {
-    msg.channel.send('Eu sou Edmilson!')
+    msg.channel.send('Eu sou Edmilson o quebra galho do restaurante!')
   }
 })
 
