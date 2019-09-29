@@ -51,6 +51,23 @@ const andre = [
   'Mano vai jogar seus emulador lá'
 ]
 
+const messages = [
+  {
+    pergunta: ['bom dia'],
+    resposta:
+      'Mermão bom dia é o caralho parcero, isso aqui é o grupo da torcida jovem, entendeu? Tu quer dar bom dia tu cria um grupo de viado, de GLS, e fica "bom dia", "boa tarde", "boa noite", ou então tu cria um grupo pra tua família, aí tu fica dando bom dia. Aqui é psicopata, ladrão, bandido, cheirador, vendedor de droga, polícia maluco, polícia assaltante, aqui tem a porra toda mermão, isso aqui é a Torcida Jovem do Flamengo! Bom dia é o caralho, rapá! Toma no cu...﻿'
+  },
+  {
+    pergunta: ['onde eu deixo esse saco de batata'],
+    resposta:
+      'Deixa ai mano!!! Sai dai mano!!! Sai daqui!!! Sai com essas batata ai meu'
+  },
+  {
+    pergunta: ['quem e voce', 'quem é voce', 'quem é vc'],
+    resposta: 'Eu sou Edmilson o quebra galho do restaurante!'
+  }
+]
+
 function getRandomInt(min, max) {
   min = Math.ceil(min)
   max = Math.floor(max)
@@ -101,52 +118,12 @@ client.on('message', msg => {
 })
 
 client.on('message', msg => {
-  if (msg.content.toLowerCase() === 'bom dia') {
-    msg.channel.send(
-      'Mermão bom dia é o caralho parcero, isso aqui é o grupo da torcida jovem, entendeu? Tu quer dar bom dia tu cria um grupo de viado, de GLS, e fica "bom dia", "boa tarde", "boa noite", ou então tu cria um grupo pra tua família, aí tu fica dando bom dia. Aqui é psicopata, ladrão, bandido, cheirador, vendedor de droga, polícia maluco, polícia assaltante, aqui tem a porra toda mermão, isso aqui é a Torcida Jovem do Flamengo! Bom dia é o caralho, rapá! Toma no cu...﻿'
+  messages.forEach(mensagem => {
+    const pergunta = mensagem.pergunta.find(
+      p => msg.content.toLowerCase() === p
     )
-  }
-})
-
-client.on('message', msg => {
-  if (msg.content.toLowerCase() === 'onde eu deixo esse saco de batata') {
-    msg.channel.send(
-      'Deixa ai mano!!! Sai dai mano!!! Sai daqui!!! Sai com essas batata ai meu'
-    )
-  }
-})
-
-client.on('message', msg => {
-  if (msg.content.toLowerCase() === 'quem e voce') {
-    msg.channel.send('Eu sou Edmilson o quebra galho do restaurante!')
-  }
-})
-
-client.on('message', msg => {
-  if (msg.content.toLowerCase() === 'trotos') {
-    msg.channel.send('Broios')
-  }
-})
-
-client.on('message', msg => {
-  if (msg.content.toLowerCase() === 'xesque') {
-    msg.channel.send('Dele!')
-  }
-})
-
-client.on('message', msg => {
-  if (msg.content.toLowerCase() === 'chama') {
-    msg.channel.send('Chama no xesquedele!')
-  }
-})
-
-client.on('message', msg => {
-  if (msg.content.toLowerCase() === 'dale') {
-    msg.channel.send('Dale!')
-    msg.channel.send('Dele!')
-    msg.channel.send('Dele!')
-    msg.channel.send('Doly!')
-  }
+    if (pergunta) msg.channel.send(mensagem.resposta)
+  })
 })
 
 client.on('message', msg => {
