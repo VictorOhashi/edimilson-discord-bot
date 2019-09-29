@@ -109,6 +109,14 @@ client.on('message', msg => {
 })
 
 client.on('message', msg => {
+  if (msg.content.toLowerCase() === 'onde eu deixo esse saco de batata') {
+    msg.channel.send(
+      'Deixa ai mano!!! Sai dai mano!!! Sai daqui!!! Sai com essas batata ai meu'
+    )
+  }
+})
+
+client.on('message', msg => {
   if (msg.content.toLowerCase() === 'trotos') {
     msg.channel.send('Broios')
   }
