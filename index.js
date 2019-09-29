@@ -15,10 +15,10 @@ const frases = [
   'Já queimou seu Judeu hj??',
   'Já fez sua parte? Deu paulada em maconheiro hj?',
   `Sim eu sou LGBT:
-    Levanta
-    Gay
-    Bora
-    Trabalhar`,
+   Levanta
+   Gay
+   Bora
+   Trabalhar`,
   'Suicídio é sempre uma opção',
   'Desistir é pros fracos, faça como eu nem tente',
   'Talkei',
