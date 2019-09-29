@@ -65,6 +65,10 @@ const messages = [
   {
     pergunta: ['quem e voce', 'quem é voce', 'quem é vc'],
     resposta: 'Eu sou Edmilson o quebra galho do restaurante!'
+  },
+  {
+    pergunta: ['koe'],
+    resposta: frases[getRandomInt(0, frases.length - 1)]
   }
 ]
 
@@ -105,15 +109,6 @@ client.on('message', msg => {
       string = string + ' ' + i
     }
     msg.channel.send(string)
-  }
-})
-
-client.on('message', msg => {
-  if (!msg.content.startsWith(prefix) || msg.author.bot) return
-  const args = msg.content.slice(prefix.length).split(' ')
-  const command = args.shift().toLowerCase()
-  if (command === 'koe') {
-    return msg.channel.send(frases[getRandomInt(0, frases.length - 1)])
   }
 })
 
