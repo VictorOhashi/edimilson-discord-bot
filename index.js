@@ -64,12 +64,16 @@ client.on('message', msg => {
     const command = args.shift().toLowerCase()
     if (command === 'setpessoa') {
       if (!args.length) {
-        return msg.channel.send(`Digita o comando direito pó, ${msg.author}!`)
+        msg.channel.send(`Digita o comando direito pó, ${msg.author}!`)
       } else {
         pessoas.push(args.shift())
+        msg.channel.send(`Esse maluco foi adicionado na lista ${args}!`)
       }
     } else if (command === 'listpessoas') {
-      return msg.channel.send(`Esses caras estão na lista, ${pessoas}!`)
+      msg.channel.send(`Esses caras estão na lista, ${pessoas}!`)
+    } else if (command === 'clearpessoas') {
+      pessoas = ['2570']
+      msg.channel.send(`Relexa limpei a lista!`)
     }
   }
 })
