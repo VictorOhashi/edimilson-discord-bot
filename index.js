@@ -44,7 +44,7 @@ const andre = [
   'Para de ficar desviando o olhar',
   'Volta pra roça de onde tu veio',
   'Olha pra mim se quiser falar comigo',
-  'Inazuma é ruim',
+  'Inazuma é um lixo',
   'Mega Men nem é jogo',
   'Não dirijo a palavra a negrinhos',
   'Vagabundo...',
@@ -53,7 +53,7 @@ const andre = [
 
 const messages = [
   {
-    pergunta: ['bom dia'],
+    pergunta: ['bom dia', 'buenos dias', 'good morning'],
     resposta:
       'Mermão bom dia é o caralho parcero, isso aqui é o grupo da torcida jovem, entendeu? Tu quer dar bom dia tu cria um grupo de viado, de GLS, e fica "bom dia", "boa tarde", "boa noite", ou então tu cria um grupo pra tua família, aí tu fica dando bom dia. Aqui é psicopata, ladrão, bandido, cheirador, vendedor de droga, polícia maluco, polícia assaltante, aqui tem a porra toda mermão, isso aqui é a Torcida Jovem do Flamengo! Bom dia é o caralho, rapá! Toma no cu...﻿'
   },
@@ -67,7 +67,7 @@ const messages = [
     resposta: 'Eu sou Edmilson o quebra galho do restaurante!'
   },
   {
-    pergunta: ['koe'],
+    pergunta: ['koe', 'eae'],
     resposta: () => frases[getRandomInt(0, frases.length - 1)]
   }
 ]
@@ -95,20 +95,11 @@ client.on('message', msg => {
     } else if (command === 'clearpessoas') {
       pessoas = ['2570']
       msg.channel.send(`Relexa limpei a lista!`)
+    } else if (command === 'ajuda') {
+      msg.channel.send(
+        'Pode usar esses comandos ai: setPessoa, listPessoas, clearPessoas'
+      )
     }
-  }
-})
-
-client.on('message', msg => {
-  if (
-    msg.author.discriminator === '5733' &&
-    msg.content.toLowerCase() === 'vamos contar ate 500?'
-  ) {
-    let string = ''
-    for (let i = 1; i < 501; i++) {
-      string = string + ' ' + i
-    }
-    msg.channel.send(string)
   }
 })
 
