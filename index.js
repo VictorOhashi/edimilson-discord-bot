@@ -68,7 +68,7 @@ const messages = [
   },
   {
     pergunta: ['koe'],
-    resposta: frases[getRandomInt(0, frases.length - 1)]
+    resposta: () => frases[getRandomInt(0, frases.length - 1)]
   }
 ]
 
