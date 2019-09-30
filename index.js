@@ -115,7 +115,10 @@ client.on('message', msg => {
 client.on('message', msg => {
   messages.forEach(m => {
     const pergunta = m.pergunta.find(p => msg.content.toLowerCase() === p)
-    if (pergunta) msg.channel.send(m.resposta)
+    if (pergunta)
+      msg.channel.send(
+        typeof m.resposta === 'function' ? m.resposta() : m.resposta
+      )
   })
 })
 
