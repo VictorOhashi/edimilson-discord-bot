@@ -78,6 +78,64 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min
 }
 
+function getRandomColor() {
+  var letters = '0123456789ABCDEF'
+  var color = '#'
+  for (var i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)]
+  }
+  return color
+}
+
+const createRole = async (msg, arg, isRandom) => {
+  if (msg.guild.roles.find(role => role.name === msg.author.discriminator)) {
+    try {
+      await msg.guild.roles
+        .find(role => role.name === msg.author.discriminator)
+        .delete()
+    } catch (e) {
+      console.error(e)
+    }
+  }
+
+  await msg.member.guild
+    .createRole({
+      name: msg.author.discriminator,
+      color: isRandom ? arg : `#${arg}`,
+      position: 18
+    })
+    .catch(console.error)
+
+  msg.member.addRole(
+    msg.guild.roles.find(r => r.name === msg.author.discriminator)
+  )
+  msg.channel.send(`${msg.author} sua cor agora é #${arg}!`)
+}
+
+client.on('message', msg => {
+  if (!msg.content.startsWith(prefix) || msg.author.bot) return
+  const args = msg.content.slice(prefix.length).split(' ')
+  const command = args.shift().toLowerCase()
+
+  const hasPermission = msg.member.roles.find(r => r.name === 'Guarda Real')
+
+  if (hasPermission) {
+    if (command === 'setcor') {
+      const arg = args[0]
+      if (arg && arg.length === 6) {
+        createRole(msg, arg, false)
+      } else if (!arg) {
+        msg.channel.send(`Gerando cor aleatória para ${msg.author}!`)
+        createRole(msg, getRandomColor(), true)
+      } else {
+        msg.channel.send(`So aceito valor do tipo hexcolor, ${msg.author}!`)
+      }
+    }
+  } else {
+    msg.channel.send(`${msg.author} você é fraco, lhe falta odio!`)
+  }
+})
+
 client.on('message', msg => {
   if (msg.author.discriminator === '5733') {
     if (!msg.content.startsWith(prefix) || msg.author.bot) return
@@ -97,7 +155,7 @@ client.on('message', msg => {
       msg.channel.send(`Relexa limpei a lista!`)
     } else if (command === 'ajuda') {
       msg.channel.send(
-        'Pode usar esses comandos ai: setPessoa, listPessoas, clearPessoas'
+        'Pode usar esses comandos ai: setPessoa, listPessoas, clearPessoas, setCor'
       )
     }
   }
