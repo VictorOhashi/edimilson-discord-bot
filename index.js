@@ -97,7 +97,6 @@ const createRole = async (msg, arg, isRandom) => {
       console.error(e)
     }
   }
-
   await msg.member.guild
     .createRole({
       name: msg.author.discriminator,
