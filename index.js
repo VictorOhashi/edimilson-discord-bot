@@ -131,8 +131,7 @@ client.on("message", msg => {
       }
     }
   } else {
-    if (args[0].length > 0)
-      msg.channel.send(`${msg.author} você é fraco, lhe falta odio!`);
+    msg.channel.send(`${msg.author} você é fraco, lhe falta odio!`);
   }
 });
 
