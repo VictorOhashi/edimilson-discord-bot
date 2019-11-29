@@ -78,7 +78,10 @@ const messages = [
     pergunta: [
       "quanto ta o dolar hoje?",
       "quanto ta o dólar hoje?",
-      "quanto ta o dolar hoje"
+      "quanto ta o dolar hoje",
+      "quanto ta o dolar?",
+      "quanto ta o dólar",
+      "quanto ta o dolar"
     ],
     resposta: () => getDolar()
   }
