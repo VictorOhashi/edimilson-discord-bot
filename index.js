@@ -88,8 +88,7 @@ async function getDolar() {
   const { data: { USD } = {} } = await axios.get(
     "https://economia.awesomeapi.com.br/all/USD-BRL"
   );
-
-  return `Já viu o dólar hoje man... R$${USD.high.toFixed(2)}`;
+  return `Já viu o dólar hoje man... R$${USD.high}`;
 }
 
 function getRandomInt(min, max) {
@@ -181,12 +180,17 @@ client.on("message", msg => {
 });
 
 client.on("message", msg => {
-  messages.forEach(m => {
+  messages.forEach(async m => {
     const pergunta = m.pergunta.find(p => msg.content.toLowerCase() === p);
-    if (pergunta)
-      msg.channel.send(
-        typeof m.resposta === "function" ? m.resposta() : m.resposta
-      );
+    if (pergunta) {
+      let resposta;
+      if (typeof m.resposta === "function") {
+        resposta = await m.resposta();
+      } else {
+        resposta = m.resposta;
+      }
+      msg.channel.send(resposta);
+    }
   });
 });
 
