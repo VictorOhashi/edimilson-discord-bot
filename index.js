@@ -1,4 +1,5 @@
 require("dotenv").config();
+const axios = require("axios");
 const Discord = require("discord.js");
 const client = new Discord.Client();
 
@@ -58,7 +59,10 @@ const messages = [
       'Mermão bom dia é o caralho parcero, isso aqui é o grupo da torcida jovem, entendeu? Tu quer dar bom dia tu cria um grupo de viado, de GLS, e fica "bom dia", "boa tarde", "boa noite", ou então tu cria um grupo pra tua família, aí tu fica dando bom dia. Aqui é psicopata, ladrão, bandido, cheirador, vendedor de droga, polícia maluco, polícia assaltante, aqui tem a porra toda mermão, isso aqui é a Torcida Jovem do Flamengo! Bom dia é o caralho, rapá! Toma no cu...﻿'
   },
   {
-    pergunta: ["onde eu deixo esse saco de batata"],
+    pergunta: [
+      "onde eu deixo esse saco de batata",
+      "onde eu deixo esse saco de batata?"
+    ],
     resposta:
       "Deixa ai mano!!! Sai dai mano!!! Sai daqui!!! Sai com essas batata ai meu"
   },
@@ -69,8 +73,24 @@ const messages = [
   {
     pergunta: ["koe", "eae"],
     resposta: () => frases[getRandomInt(0, frases.length - 1)]
+  },
+  {
+    pergunta: [
+      "quanto ta o dolar hoje?",
+      "quanto ta o dólar hoje?",
+      "quanto ta o dolar hoje"
+    ],
+    resposta: () => getDolar()
   }
 ];
+
+async function getDolar() {
+  const { data: { USD } = {} } = await axios.get(
+    "https://economia.awesomeapi.com.br/all/USD-BRL"
+  );
+
+  return `Já viu o dólar hoje man... R$${USD.high.toFixed(2)}`;
+}
 
 function getRandomInt(min, max) {
   min = Math.ceil(min);
