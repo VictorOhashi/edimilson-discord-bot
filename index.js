@@ -84,6 +84,17 @@ const messages = [
       "quanto ta o dolar"
     ],
     resposta: () => getDolar()
+  },
+  {
+    pergunta: [
+      "como ta o corona?",
+      "como ta o corona",
+      "como ta o coronavirus?",
+      "como ta o coronavirus",
+      "como ta o coronavirus hoje",
+      "como ta o coronavirus hoje?"
+    ],
+    resposta: () => getCorona()
   }
 ];
 
@@ -92,6 +103,46 @@ async function getDolar() {
     "https://economia.awesomeapi.com.br/all/USD-BRL"
   );
   return `Já viu o dólar hoje man... R$${USD.high}`;
+}
+
+async function getCorona() {
+  const { data = {} } = await axios({
+    method: "get",
+    url: "https://coronavirus-monitor.p.rapidapi.com/coronavirus/worldstat.php",
+    headers: {
+      "x-rapidapi-host": "coronavirus-monitor.p.rapidapi.com",
+      "x-rapidapi-key": "5bbdd4e708msh44ce4a066047ac3p15648cjsnb651af974615"
+    }
+  });
+
+  const { data: { latest_stat_by_country } = {} } = await axios({
+    method: "get",
+    url:
+      "https://coronavirus-monitor.p.rapidapi.com/coronavirus/latest_stat_by_country.php?country=brazil",
+    headers: {
+      "x-rapidapi-host": "coronavirus-monitor.p.rapidapi.com",
+      "x-rapidapi-key": "5bbdd4e708msh44ce4a066047ac3p15648cjsnb651af974615"
+    }
+  });
+  const dataBrasil = latest_stat_by_country[0] || {};
+
+  return `
+Atualmente no mundo:
+  Confirmados: ${data.total_cases}
+  Total de mortos: ${data.total_deaths}
+  Total recuperados: ${data.total_recovered}
+  Novos casos: ${data.new_cases}
+  Novas mortes: ${data.new_deaths}
+  Dados de: ${data.statistic_taken_at}
+---------------------------------------------------------
+Atualmente no brasil:
+  Confirmados: ${dataBrasil.total_cases}
+  Total de mortos: ${dataBrasil.total_deaths}
+  Total recuperados: ${dataBrasil.total_recovered}
+  Novos casos: ${dataBrasil.new_cases}
+  Novas mortes: ${dataBrasil.new_deaths}
+  Dados de: ${dataBrasil.record_date}
+  `;
 }
 
 function getRandomInt(min, max) {
