@@ -36,7 +36,7 @@ const frases = [
   "Mano, ela é diferente das outras",
   "5 centímetros de puro prazer, 3 segundos de pura emoção",
   "Que porra de musica é essa que ta tocando caralho",
-  "Pare de tentar e comece a desistir"
+  "Pare de tentar e comece a desistir",
 ];
 
 const andre = [
@@ -49,30 +49,30 @@ const andre = [
   "Mega Men nem é jogo",
   "Não dirijo a palavra a negrinhos",
   "Vagabundo...",
-  "Mano vai jogar seus emulador lá"
+  "Mano vai jogar seus emulador lá",
 ];
 
 const messages = [
   {
     pergunta: ["bom dia", "buenos dias", "good morning"],
     resposta:
-      'Mermão bom dia é o caralho parcero, isso aqui é o grupo da torcida jovem, entendeu? Tu quer dar bom dia tu cria um grupo de viado, de GLS, e fica "bom dia", "boa tarde", "boa noite", ou então tu cria um grupo pra tua família, aí tu fica dando bom dia. Aqui é psicopata, ladrão, bandido, cheirador, vendedor de droga, polícia maluco, polícia assaltante, aqui tem a porra toda mermão, isso aqui é a Torcida Jovem do Flamengo! Bom dia é o caralho, rapá! Toma no cu...﻿'
+      'Mermão bom dia é o caralho parcero, isso aqui é o grupo da torcida jovem, entendeu? Tu quer dar bom dia tu cria um grupo de viado, de GLS, e fica "bom dia", "boa tarde", "boa noite", ou então tu cria um grupo pra tua família, aí tu fica dando bom dia. Aqui é psicopata, ladrão, bandido, cheirador, vendedor de droga, polícia maluco, polícia assaltante, aqui tem a porra toda mermão, isso aqui é a Torcida Jovem do Flamengo! Bom dia é o caralho, rapá! Toma no cu...﻿',
   },
   {
     pergunta: [
       "onde eu deixo esse saco de batata",
-      "onde eu deixo esse saco de batata?"
+      "onde eu deixo esse saco de batata?",
     ],
     resposta:
-      "Deixa ai mano!!! Sai dai mano!!! Sai daqui!!! Sai com essas batata ai meu"
+      "Deixa ai mano!!! Sai dai mano!!! Sai daqui!!! Sai com essas batata ai meu",
   },
   {
     pergunta: ["quem e voce", "quem é voce", "quem é vc"],
-    resposta: "Eu sou Edmilson o quebra galho do restaurante!"
+    resposta: "Eu sou Edmilson o quebra galho do restaurante!",
   },
   {
     pergunta: ["koe", "eae"],
-    resposta: () => frases[getRandomInt(0, frases.length - 1)]
+    resposta: () => frases[getRandomInt(0, frases.length - 1)],
   },
   {
     pergunta: [
@@ -81,9 +81,9 @@ const messages = [
       "quanto ta o dolar hoje",
       "quanto ta o dolar?",
       "quanto ta o dólar",
-      "quanto ta o dolar"
+      "quanto ta o dolar",
     ],
-    resposta: () => getDolar()
+    resposta: () => getDolar(),
   },
   {
     pergunta: [
@@ -92,10 +92,10 @@ const messages = [
       "como ta o coronavirus?",
       "como ta o coronavirus",
       "como ta o coronavirus hoje",
-      "como ta o coronavirus hoje?"
+      "como ta o coronavirus hoje?",
     ],
-    resposta: () => getCorona()
-  }
+    resposta: () => getCorona(),
+  },
 ];
 
 async function getDolar() {
@@ -111,18 +111,18 @@ async function getCorona() {
     url: "https://coronavirus-monitor.p.rapidapi.com/coronavirus/worldstat.php",
     headers: {
       "x-rapidapi-host": "coronavirus-monitor.p.rapidapi.com",
-      "x-rapidapi-key": "5bbdd4e708msh44ce4a066047ac3p15648cjsnb651af974615"
-    }
+      "x-rapidapi-key": "5bbdd4e708msh44ce4a066047ac3p15648cjsnb651af974615",
+    },
   });
 
-  const { data: { latest_stat_by_country } = {} } = await axios({
+  const { data: { latest_stat_by_country = [] } = {} } = await axios({
     method: "get",
     url:
       "https://coronavirus-monitor.p.rapidapi.com/coronavirus/latest_stat_by_country.php?country=brazil",
     headers: {
       "x-rapidapi-host": "coronavirus-monitor.p.rapidapi.com",
-      "x-rapidapi-key": "5bbdd4e708msh44ce4a066047ac3p15648cjsnb651af974615"
-    }
+      "x-rapidapi-key": "5bbdd4e708msh44ce4a066047ac3p15648cjsnb651af974615",
+    },
   });
   const dataBrasil = latest_stat_by_country[0] || {};
 
@@ -135,13 +135,19 @@ Atualmente no mundo:
   Novas mortes: ${data.new_deaths}
   Dados de: ${data.statistic_taken_at}
 ---------------------------------------------------------
+${
+  latest_stat_by_country.length > 0
+    ? `
 Atualmente no brasil:
-  Confirmados: ${dataBrasil.total_cases}
-  Total de mortos: ${dataBrasil.total_deaths}
-  Total recuperados: ${dataBrasil.total_recovered}
-  Novos casos: ${dataBrasil.new_cases}
-  Novas mortes: ${dataBrasil.new_deaths}
-  Dados de: ${dataBrasil.record_date}
+Confirmados: ${dataBrasil.total_cases}
+Total de mortos: ${dataBrasil.total_deaths}
+Total recuperados: ${dataBrasil.total_recovered}
+Novos casos: ${dataBrasil.new_cases}
+Novas mortes: ${dataBrasil.new_deaths}
+Dados de: ${dataBrasil.record_date}
+`
+    : ""
+}
   `;
 }
 
@@ -161,10 +167,10 @@ function getRandomColor() {
 }
 
 const createRole = async (msg, arg, isRandom) => {
-  if (msg.guild.roles.find(role => role.name === msg.author.discriminator)) {
+  if (msg.guild.roles.find((role) => role.name === msg.author.discriminator)) {
     try {
       await msg.guild.roles
-        .find(role => role.name === msg.author.discriminator)
+        .find((role) => role.name === msg.author.discriminator)
         .delete();
     } catch (e) {
       console.error(e);
@@ -174,22 +180,22 @@ const createRole = async (msg, arg, isRandom) => {
     .createRole({
       name: msg.author.discriminator,
       color: isRandom ? arg : `#${arg}`,
-      position: 18
+      position: 18,
     })
     .catch(console.error);
 
   msg.member.addRole(
-    msg.guild.roles.find(r => r.name === msg.author.discriminator)
+    msg.guild.roles.find((r) => r.name === msg.author.discriminator)
   );
   msg.channel.send(`${msg.author} sua cor agora é #${arg}!`);
 };
 
-client.on("message", msg => {
+client.on("message", (msg) => {
   if (!msg.content.startsWith(prefix) || msg.author.bot) return;
   const args = msg.content.slice(prefix.length).split(" ");
   const command = args.shift().toLowerCase();
 
-  const hasPermission = msg.member.roles.find(r => r.name === "Guarda Real");
+  const hasPermission = msg.member.roles.find((r) => r.name === "Guarda Real");
 
   if (hasPermission) {
     if (command === "setcor") {
@@ -208,7 +214,7 @@ client.on("message", msg => {
   }
 });
 
-client.on("message", msg => {
+client.on("message", (msg) => {
   if (msg.author.discriminator === "5733") {
     if (!msg.content.startsWith(prefix) || msg.author.bot) return;
     const args = msg.content.slice(prefix.length).split(" ");
@@ -233,9 +239,9 @@ client.on("message", msg => {
   }
 });
 
-client.on("message", msg => {
-  messages.forEach(async m => {
-    const pergunta = m.pergunta.find(p => msg.content.toLowerCase() === p);
+client.on("message", (msg) => {
+  messages.forEach(async (m) => {
+    const pergunta = m.pergunta.find((p) => msg.content.toLowerCase() === p);
     if (pergunta) {
       let resposta;
       if (typeof m.resposta === "function") {
@@ -248,9 +254,9 @@ client.on("message", msg => {
   });
 });
 
-client.on("message", msg => {
+client.on("message", (msg) => {
   if (msg.content.startsWith(prefix) || msg.author.bot) return;
-  const pessoa = pessoas.find(p => msg.author.discriminator === p);
+  const pessoa = pessoas.find((p) => msg.author.discriminator === p);
   if (pessoa === "2570") {
     msg.reply(andre[getRandomInt(0, andre.length - 1)]);
   } else if (pessoa) {
