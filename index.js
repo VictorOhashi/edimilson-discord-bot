@@ -3,7 +3,7 @@ const axios = require("axios");
 const Discord = require("discord.js");
 const client = new Discord.Client();
 
-let pessoas = ["2570"];
+let pessoas = [];
 let prefix = ".";
 
 const frases = [
@@ -39,18 +39,6 @@ const frases = [
   "Pare de tentar e comece a desistir",
 ];
 
-const andre = [
-  "Vocé é muito gay",
-  "Dps te apresento um instrumento mágico... cortador de unha",
-  "Para de ficar desviando o olhar",
-  "Volta pra roça de onde tu veio",
-  "Olha pra mim se quiser falar comigo",
-  "Inazuma é um lixo",
-  "Mega Men nem é jogo",
-  "Não dirijo a palavra a negrinhos",
-  "Vagabundo...",
-  "Mano vai jogar seus emulador lá",
-];
 
 const messages = [
   {
@@ -229,7 +217,6 @@ client.on("message", (msg) => {
     } else if (command === "listpessoas") {
       msg.channel.send(`Esses caras estão na lista, ${pessoas}!`);
     } else if (command === "clearpessoas") {
-      pessoas = ["2570"];
       msg.channel.send(`Relexa limpei a lista!`);
     } else if (command === "ajuda") {
       msg.channel.send(
@@ -257,11 +244,10 @@ client.on("message", (msg) => {
 client.on("message", (msg) => {
   if (msg.content.startsWith(prefix) || msg.author.bot) return;
   const pessoa = pessoas.find((p) => msg.author.discriminator === p);
-  if (pessoa === "2570") {
-    msg.reply(andre[getRandomInt(0, andre.length - 1)]);
-  } else if (pessoa) {
+ if (pessoa) {
     msg.reply(frases[getRandomInt(0, frases.length - 1)]);
   }
 });
 
 client.login(process.env.BOT_TOKEN);
+
