@@ -39,7 +39,6 @@ const frases = [
   "Pare de tentar e comece a desistir",
 ];
 
-
 const messages = [
   {
     pergunta: ["bom dia", "buenos dias", "good morning"],
@@ -196,6 +195,8 @@ client.on("message", (msg) => {
       } else {
         msg.channel.send(`So aceito valor do tipo hexcolor, ${msg.author}!`);
       }
+    } else if (command === "ajuda") {
+      msg.channel.send("Pode usar esses comandos ai: setCor");
     }
   } else {
     msg.channel.send(`${msg.author} você é fraco, lhe falta odio!`);
@@ -217,6 +218,7 @@ client.on("message", (msg) => {
     } else if (command === "listpessoas") {
       msg.channel.send(`Esses caras estão na lista, ${pessoas}!`);
     } else if (command === "clearpessoas") {
+      pessoas = [];
       msg.channel.send(`Relexa limpei a lista!`);
     } else if (command === "ajuda") {
       msg.channel.send(
@@ -244,10 +246,9 @@ client.on("message", (msg) => {
 client.on("message", (msg) => {
   if (msg.content.startsWith(prefix) || msg.author.bot) return;
   const pessoa = pessoas.find((p) => msg.author.discriminator === p);
- if (pessoa) {
+  if (pessoa) {
     msg.reply(frases[getRandomInt(0, frases.length - 1)]);
   }
 });
 
 client.login(process.env.BOT_TOKEN);
-
