@@ -182,7 +182,9 @@ client.on("message", (msg) => {
   const args = msg.content.slice(prefix.length).split(" ");
   const command = args.shift().toLowerCase();
 
-  const hasPermission = msg.member.roles.find((r) => r.name === "Guarda Real");
+  const hasPermission = msg.member.roles.find(
+    (r) => r.name === "Guarda Real" || r.name === "Nobres"
+  );
 
   if (hasPermission) {
     if (command === "setcor") {
